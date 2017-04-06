@@ -20,6 +20,7 @@ from cntk.layers import *
 from cntk.layers.sequence import *
 from cntk.layers.models.attention import *
 from cntk.layers.typing import *
+from cntk.debugging.debug import debug_model
 
 ########################
 # variables and stuff  #
@@ -207,6 +208,7 @@ def train(train_reader, valid_reader, vocab, i2w, s2smodel, max_epochs, epoch_si
 
     # create the training wrapper for the s2smodel, as well as the criterion function
     model_train = create_model_train(s2smodel)
+    model_train = debug_model(model_train)
     criterion = create_criterion_function(model_train)
 
     # also wire in a greedy decoder so that we can properly log progress on a validation example
