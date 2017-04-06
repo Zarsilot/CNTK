@@ -141,7 +141,7 @@ public:
         if (poolIncludePad)
             poolMode = CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING;
         if (forceDeterministicAlgorithms)
-        {
+        {   // deterministic maxpool is not working when kernel size > stride size in cuDNN. We ignore this flag for now. 
         }
         // Must use CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING to get the same results as in reference engine.
         CUDNN_CALL(cudnnSetPoolingNdDescriptor(m_pool,
